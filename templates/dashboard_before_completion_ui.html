@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+
+    <title>Jewelry Production</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 16px;
+            background: #f4f5f7;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .header {
+            margin-bottom: 16px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        .top-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 16px;
+            margin-bottom: 18px;
+        }
+
+        .top-button {
+            flex: 1;
+            display: block;
+            text-align: center;
+            text-decoration: none;
+            padding: 14px 10px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .new-order {
+            background: #222;
+            color: white;
+        }
+
+        .all-orders {
+            background: #555;
+            color: white;
+        }
+
+        .layout {
+            display: grid;
+            grid-template-columns: 230px 1fr;
+            gap: 16px;
+            align-items: start;
+        }
+
+        .sidebar {
+            background: white;
+            padding: 14px;
+            border-radius: 12px;
+            box-shadow:
+                0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .sidebar-title {
+            font-size: 13px;
+            font-weight: bold;
+            color: #777;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            text-decoration: none;
+            color: #222;
+            padding: 11px 10px;
+            margin-bottom: 5px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .nav-link:hover {
+            background: #f0f2f5;
+        }
+
+        .nav-count {
+            min-width: 28px;
+            text-align: center;
+            padding: 4px 7px;
+            border-radius: 14px;
+            background: #eee;
+            font-size: 13px;
+        }
+
+        .sidebar-divider {
+            border: none;
+            border-top: 1px solid #eee;
+            margin: 14px 0;
+        }
+
+        .special-link {
+            background: #f4f5f7;
+        }
+
+        .main {
+            min-width: 0;
+        }
+
+        .welcome-card {
+            background: white;
+            padding: 22px;
+            border-radius: 12px;
+            box-shadow:
+                0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .welcome-card h2 {
+            margin-top: 0;
+            margin-bottom: 8px;
+        }
+
+        .welcome-card p {
+            margin: 0;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 700px) {
+
+            body {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .top-buttons {
+                flex-direction: column;
+            }
+
+            .layout {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                order: 1;
+            }
+
+            .main {
+                order: 2;
+            }
+
+            .nav-link {
+                padding: 13px 11px;
+            }
+
+        }
+        .todo-card {
+            background: white;
+            padding: 20px;
+            border-radius: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin-top: 16px;
+        }
+
+        .todo-header h2 {
+            margin: 0;
+        }
+
+        .todo-header p {
+            margin: 6px 0 18px;
+            color: #666;
+        }
+
+        .todo-form {
+            display: grid;
+            grid-template-columns: 1fr 180px 1fr auto;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .todo-form input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        .todo-add-button {
+            border: none;
+            background: #222;
+            color: white;
+            padding: 12px 18px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .todo-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .todo-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 14px;
+            border: 1px solid #e5e5e5;
+            border-radius: 10px;
+            background: #fafafa;
+        }
+
+        .todo-check {
+            width: 34px;
+            height: 34px;
+            border: 1px solid #ccc;
+            border-radius: 50%;
+            background: white;
+            cursor: pointer;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .todo-content {
+            flex: 1;
+        }
+
+        .todo-task {
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .todo-date {
+            margin-top: 5px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .todo-notes {
+            margin-top: 5px;
+            font-size: 14px;
+            color: #777;
+        }
+
+        .todo-empty {
+            padding: 18px;
+            text-align: center;
+            color: #777;
+            border: 1px dashed #ccc;
+            border-radius: 10px;
+        }
+
+        @media (max-width: 700px) {
+
+            .todo-form {
+                grid-template-columns: 1fr;
+            }
+
+            .todo-add-button {
+                width: 100%;
+            }
+
+        }
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+
+        <h1>💎 Jewelry Production</h1>
+
+    </div>
+
+
+    <div class="top-buttons">
+
+        <a
+            class="top-button new-order"
+            href="/orders/new">
+
+            ➕ Create New Order
+
+        </a>
+
+
+        <a
+            class="top-button all-orders"
+            href="/orders">
+
+            📋 View All Orders
+
+        </a>
+
+    </div>
+
+
+    <div class="layout">
+
+
+        <!-- LEFT PANEL -->
+
+        <aside class="sidebar">
+	<div class="sidebar-title">
+    Orders
+</div>
+
+<a
+    class="nav-link special-link"
+    href="/orders?filter=not_started">
+
+    <span>Not Started Orders</span>
+
+    <span class="nav-count">
+        {{ counts["Not Started Orders"] }}
+    </span>
+
+</a>
+
+<a
+    class="nav-link special-link"
+    href="/orders?filter=in_progress">
+
+    <span>In Progress Orders</span>
+
+    <span class="nav-count">
+        {{ counts["In Progress Orders"] }}
+    </span>
+
+</a>
+
+<a
+    class="nav-link special-link"
+    href="/orders?filter=finished">
+
+    <span>Finished Orders</span>
+
+    <span class="nav-count">
+        {{ counts["Finished Orders"] }}
+    </span>
+
+</a>
+
+<hr class="sidebar-divider">
+
+            <div class="sidebar-title">
+                Production
+            </div>
+
+
+            <a
+                class="nav-link"
+                href="/orders?stage=New">
+
+                <span>New Orders</span>
+
+                <span class="nav-count">
+                    {{ counts["New Orders"] }}
+                </span>
+
+            </a>
+
+
+            <a
+                class="nav-link"
+                href="/orders?stage=CAD">
+
+                <span>CAD</span>
+
+                <span class="nav-count">
+                    {{ counts["CAD"] }}
+                </span>
+
+            </a>
+
+
+            <a
+                class="nav-link"
+                href="/orders?stage=Casting">
+
+                <span>Casting</span>
+
+                <span class="nav-count">
+                    {{ counts["Casting"] }}
+                </span>
+
+            </a>
+
+
+            <a
+                class="nav-link"
+                href="/orders?stage=Stone">
+
+                <span>Stone</span>
+
+                <span class="nav-count">
+                    {{ counts["Stone"] }}
+                </span>
+
+            </a>
+
+
+            <a
+                class="nav-link"
+                href="/orders?stage=Components">
+
+                <span>Components</span>
+
+                <span class="nav-count">
+                    {{ counts["Components"] }}
+                </span>
+
+            </a>
+
+
+            <a
+                class="nav-link"
+                href="/orders?stage=Setting%20%2F%20Jewelry%20Work">
+
+                <span>Setting / Jewelry Work</span>
+
+                <span class="nav-count">
+                    {{ counts["Setting / Jewelry Work"] }}
+                </span>
+
+            </a>
+
+
+            <a
+                class="nav-link"
+                href="/orders?stage=OC">
+
+                <span>OC</span>
+
+                <span class="nav-count">
+                    {{ counts["OC"] }}
+                </span>
+
+            </a>
+
+
+            <a
+                class="nav-link"
+                href="/orders?stage=Finish">
+
+                <span>Finish</span>
+
+                <span class="nav-count">
+                    {{ counts["Finish"] }}
+                </span>
+
+            </a>
+
+
+           
+
+        </aside>
+
+
+        <!-- MAIN AREA -->
+
+        <main class="main">
+
+            <div class="welcome-card">
+
+                <h2>Production Dashboard</h2>
+
+                <p>
+                    Select a production stage or order status
+                    from the panel to view the related orders.
+                </p>
+
+            </div>
+            <div class="todo-card">
+
+                <div class="todo-header">
+
+                    <div>
+                        <h2>Reminders / To-Do</h2>
+                        <p>Tasks sorted by due date</p>
+                    </div>
+
+                </div>
+
+
+                <form
+                    action="/todos/create"
+                    method="POST"
+                    class="todo-form">
+
+                    <input
+                        type="text"
+                        name="task"
+                        placeholder="What needs to be done?"
+                        required>
+
+                    <input
+                        type="date"
+                        name="due_date"
+                        required>
+
+                    <input
+                        type="text"
+                        name="notes"
+                        placeholder="Optional note">
+
+                    <button
+                        type="submit"
+                        class="todo-add-button">
+
+                        Add To-Do
+
+                    </button>
+
+                </form>
+
+
+                <div class="todo-list">
+
+                    {% if todos %}
+
+                        {% for todo in todos %}
+
+                            <div class="todo-item">
+
+                                <form
+                                    action="/todos/{{ todo['id'] }}/complete"
+                                    method="POST">
+
+                                    <button
+                                        type="submit"
+                                        class="todo-check"
+                                        title="Mark completed">
+
+                                        ✓
+
+                                    </button>
+
+                                </form>
+
+
+                                <div class="todo-content">
+
+                                    <div class="todo-task">
+                                        {{ todo["task"] }}
+                                    </div>
+
+                                    <div class="todo-date">
+                                        Due: {{ todo["due_date"] }}
+                                    </div>
+
+                                    {% if todo["notes"] %}
+
+                                        <div class="todo-notes">
+                                            {{ todo["notes"] }}
+                                        </div>
+
+                                    {% endif %}
+
+                                </div>
+
+                            </div>
+
+                        {% endfor %}
+
+                    {% else %}
+
+                        <div class="todo-empty">
+                            No active reminders.
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

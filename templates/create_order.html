@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>New Order - Jewelry Production</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 16px;
+            background: #f4f5f7;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        label {
+            display: block;
+            margin-top: 16px;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 24px;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .save-button {
+            background: #222;
+            color: white;
+        }
+
+        .back-button {
+            background: #ddd;
+            color: #222;
+        }
+
+        .photo-note {
+            font-size: 13px;
+            color: #666;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>➕ New Order</h1>
+
+    <div class="card">
+
+        <form method="POST"
+              action="/orders/create"
+              enctype="multipart/form-data">
+
+            <label for="customer">
+                Customer
+            </label>
+
+            <input
+                type="text"
+                id="customer"
+                name="customer"
+                placeholder="Enter customer name"
+                required
+            >
+
+            <label for="order_type">
+                Order Type
+            </label>
+
+            <select
+                id="order_type"
+                name="order_type"
+                required
+            >
+                <option value="New">New Order</option>
+                <option value="Repair">Repair</option>
+            </select>
+
+            <label for="product_number">
+                Product / Design Number
+            </label>
+
+            <input
+                type="text"
+                id="product_number"
+                name="product_number"
+                placeholder="Example: R-1025"
+            >
+
+            <label for="quantity">
+                Quantity
+            </label>
+
+            <input
+                type="number"
+                id="quantity"
+                name="quantity"
+                value="1"
+                min="1"
+                required
+            >
+
+            <label for="due_date">
+                Due Date
+            </label>
+
+            <input
+                type="date"
+                id="due_date"
+                name="due_date"
+            >
+
+            <label for="photo">
+                Product Photo
+            </label>
+
+           <input
+    type="file"
+    id="photo"
+    name="photo"
+    accept="image/*"
+>
+
+            <div class="photo-note">
+                On a phone, this can allow you to take a photo of the jewelry.
+            </div>
+
+            <label for="notes">
+                Notes
+            </label>
+
+            <textarea
+                id="notes"
+                name="notes"
+                placeholder="Additional information..."
+            ></textarea>
+
+            <button
+                type="submit"
+                class="save-button">
+                Save Order
+            </button>
+
+            <button
+                type="button"
+                class="back-button"
+                onclick="window.location.href='/'">
+                Cancel
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

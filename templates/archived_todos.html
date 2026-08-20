@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Archived To-Dos</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #f5f6f8;
+            font-family: Arial, sans-serif;
+            color: #222;
+        }
+
+        .page {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            padding: 22px;
+            border-radius: 14px;
+            box-shadow:
+                0 2px 8px rgba(0,0,0,0.08);
+            margin-bottom: 16px;
+        }
+
+        .header h1 {
+            margin: 0 0 6px;
+        }
+
+        .header p {
+            margin: 0;
+            color: #666;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 16px;
+            padding: 10px 14px;
+            background: #222;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .todo-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .todo-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            background: white;
+            padding: 16px;
+            border-radius: 12px;
+            border: 1px solid #e5e5e5;
+        }
+
+        .todo-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .todo-task {
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        .todo-date {
+            margin-top: 5px;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .todo-completed-date,
+        .todo-archived-date {
+            margin-top: 4px;
+            color: #777;
+            font-size: 13px;
+        }
+
+        .todo-notes {
+            margin-top: 8px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .todo-restore-form {
+            flex-shrink: 0;
+        }
+
+        .todo-restore-button {
+            border: none;
+            background: #222;
+            color: white;
+            padding: 9px 13px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .todo-empty {
+            background: white;
+            padding: 30px;
+            text-align: center;
+            color: #777;
+            border-radius: 12px;
+            border: 1px dashed #ccc;
+        }
+
+        @media (max-width: 600px) {
+
+            body {
+                padding: 10px;
+            }
+
+            .todo-item {
+                flex-direction: column;
+            }
+
+            .todo-restore-form,
+            .todo-restore-button {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="page">
+
+        <div class="header">
+
+            <h1>Archived To-Dos</h1>
+
+            <p>
+                Completed tasks that have been archived.
+            </p>
+
+            <a
+                href="/"
+                class="back-button">
+
+                ← Back to Dashboard
+
+            </a>
+
+        </div>
+
+
+        <div class="todo-list">
+
+            {% if archived_todos %}
+
+                {% for todo in archived_todos %}
+
+                    <div class="todo-item">
+
+                        <div class="todo-content">
+
+                            <div class="todo-task">
+                                {{ todo["task"] }}
+                            </div>
+
+                            <div class="todo-date">
+                                Due: {{ todo["due_date"] }}
+                            </div>
+
+                            <div class="todo-completed-date">
+                                Completed:
+                                {{ todo["completed_at"] }}
+                            </div>
+
+                            <div class="todo-archived-date">
+                                Archived:
+                                {{ todo["archived_at"] }}
+                            </div>
+
+                            {% if todo["notes"] %}
+
+                                <div class="todo-notes">
+                                    {{ todo["notes"] }}
+                                </div>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <form
+                            action="/todos/{{ todo['id'] }}/restore"
+                            method="POST"
+                            class="todo-restore-form">
+
+                            <button
+                                type="submit"
+                                class="todo-restore-button">
+
+                                Restore
+
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                {% endfor %}
+
+            {% else %}
+
+                <div class="todo-empty">
+
+                    No archived tasks yet.
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

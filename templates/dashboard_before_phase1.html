@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+
+    <title>Jewelry Production</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 16px;
+            background: #f4f5f7;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .button {
+            display: block;
+            text-align: center;
+            text-decoration: none;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        .new-order {
+            background: #222;
+            color: white;
+        }
+
+        .orders-button {
+            background: #555;
+            color: white;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns:
+                repeat(auto-fit, minmax(140px, 1fr));
+
+            gap: 12px;
+
+            margin-top: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 18px;
+            border-radius: 12px;
+            box-shadow:
+                0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .number {
+            font-size: 30px;
+            font-weight: bold;
+            margin-top: 8px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>💎 Jewelry Production</h1>
+
+
+    <a
+        class="button new-order"
+        href="/orders/new">
+
+        ➕ Create New Order
+
+    </a>
+
+
+    <a
+        class="button orders-button"
+        href="/orders">
+
+        📋 View All Orders
+
+    </a>
+
+
+    <div class="dashboard">
+
+        <div class="card">
+
+            <div>
+                New Orders
+            </div>
+
+            <div class="number">
+                {{ counts["New Orders"] }}
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div>
+                CAD
+            </div>
+
+            <div class="number">
+                {{ counts["CAD"] }}
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div>
+                Casting
+            </div>
+
+            <div class="number">
+                {{ counts["Casting"] }}
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div>
+                Stone
+            </div>
+
+            <div class="number">
+                {{ counts["Stone"] }}
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div>
+                Components
+            </div>
+
+            <div class="number">
+                {{ counts["Components"] }}
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div>
+                Setting / Jewelry Work
+            </div>
+
+            <div class="number">
+                {{ counts["Setting / Jewelry Work"] }}
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div>
+                OC
+            </div>
+
+            <div class="number">
+                {{ counts["OC"] }}
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div>
+                Finish
+            </div>
+
+            <div class="number">
+                {{ counts["Finish"] }}
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
